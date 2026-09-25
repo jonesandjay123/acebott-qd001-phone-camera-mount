@@ -79,14 +79,16 @@ def check(o):
     print(f"{o.name}: verts={len(bm.verts)} nonmanifold_edges={nm} shells={sh} volume={vol/1000:.1f} cm3 "
           f"bbox=({min(v.x for v in bb):.1f},{min(v.y for v in bb):.1f},{min(v.z for v in bb):.1f})..({max(v.x for v in bb):.1f},{max(v.y for v in bb):.1f},{max(v.z for v in bb):.1f})")
     bm.free(); return nm == 0 and sh == 1
-def printcheck(name, res=1.0, zbed=0.0):
+def printcheck(name, res=1.0, zbed=0.0, eps=0.0):
+    # eps: shifts the sample grid so voxel centres do not land exactly on flat faces (z22.5 roof, z35.5 gable, z7.5 notch),
+    # which otherwise shows up as 1-voxel phantom islands. 0.0 keeps the V5..V7 behaviour.
     import numpy as np
     from mathutils.bvhtree import BVHTree
     o = bpy.data.objects[name]
     bm = bmesh.new(); bm.from_mesh(o.data); bmesh.ops.triangulate(bm, faces=bm.faces); bvh = BVHTree.FromBMesh(bm)
     co = np.array([v.co[:] for v in bm.verts]); mn, mx = co.min(0), co.max(0)
-    xs = np.arange(mn[0]+res/2, mx[0], res); ys = np.arange(mn[1]+res/2, mx[1], res)
-    nz = int(np.ceil((mx[2]-mn[2])/res)); zc = mn[2] + (np.arange(nz)+0.5)*res
+    xs = np.arange(mn[0]+res/2+eps, mx[0], res); ys = np.arange(mn[1]+res/2+eps, mx[1], res)
+    nz = int(np.ceil((mx[2]-mn[2])/res)); zc = mn[2] + (np.arange(nz)+0.5)*res + eps
     V = np.zeros((nz, len(ys), len(xs)), bool); up = Vector((0, 0, 1))
     for iy, y in enumerate(ys):
         for ix, x in enumerate(xs):
