@@ -19,20 +19,26 @@ dropped to keep the part simpler and lighter.
 | Battery bay | Y −76 … −28, roof Z 22.5 (right) / gable to 35.5 (left, includes DC plug zone to Y −2) |
 | USB‑C window (left wall) | Y 10 … 42, Z 11 … 25 |
 | Screw-head notches | Y 7 … 22, Z 0 … 7.5, both walls |
-| Mast (transverse wall) | Y −20 … −17.6, wire arch Z 32 … 54, 34 mm wide |
-| Tower plate | Y −20.9 … −17.5, Z 54 … 150, X ±44.25; pentagon window X ±22, Z 66 … 138 |
+| Mast (transverse wall) | Y −20 … −17.6, Z 32 … 65, wire arch Z 32 … 54, 34 mm wide |
+| Tower plate (V7) | Y −48 … −44.6, arched bottom (springs Z 37 at the walls, 30 mm bridge at Z 58.2), plate Z 60 … 150, X ±44.25; pentagon window X ±22, Z 66 … 138 |
 | Phone slot | width 81.5, depth 18.5, lips at X ±36.25, phone bottom Z 54 |
-| Bottom groove | Y −34.9 … −20.9 (14 mm), pads X 25.5 … 40.75 each side |
-| Gussets | X ±36.2 … ±39.6, from wall top (Z 64, Y +10) to plate at Z 125 |
+| Bottom groove | Y −62 … −48 (14 mm), pads X 25.5 … 40.75 each side; lips Y −66.5 … −69 |
+| Front gussets | X ±36.2 … ±39.6 on the bay walls, Y −45.6 … −26, apex Z 118 (behind the mast) |
+| Rear gussets | same walls behind the lips, Y −69 … −88, apex Z 105 |
 | Rear fins | 5 × 2.4 mm at X 0, ±13, ±26, Y −92 … −76.5, Z 0 … 30, on a 2 mm pad, tied by the band at Y −92 |
 
 ## Load path
-Phone → tower plate (vertical, in-plane stiff sideways) → two front gussets (in-plane stiff fore/aft)
-→ front side walls → feet. The tower's rear side rests on the side trays, which sit on the battery-bay
-walls via 45° haunches. Transverse ties: mast (front), tower plate (middle), tie band + fins (rear).
+Phone → arched tower plate (vertical, in-plane stiff sideways; its arch ties the two bay walls)
+→ front gussets on the bay walls (in-plane stiff fore/aft) → walls → feet. Rails + plate form a C
+channel; rear gussets behind the lips stop the rails bending outward. Transverse ties: mast (front),
+arched tower plate (middle), tie band + fins (rear).
 
 ## Clearances that must stay
 - Nothing inside X ±36, Z < 31 over the battery (battery slides out sideways).
 - Left wall Y −22 … −2 open below Z 25 for the DC plug.
-- Board/wiring area (Y −18 … +36) open above the walls; wires loop up to ~Z 100 in front of the mast.
+- **Wire keep-out (learned the hard way with V6):** the Dupont bundle from the board headers loops up
+  to ~Z 100–110 and forward to the ultrasonic module, entirely INSIDE the chamber in front of the mast.
+  Nothing may occupy X ±36.25 / Y > −17.55 / Z > 40, nothing above Z 65 in front of the mast, and
+  nothing beyond Y 46 (front module). `build_v7.py` proves this with boolean intersections = 0.
+  The chamber could shrink ~10 mm per side if ever needed, but the structure must live behind the mast.
 - Phone camera bar (top ~55 mm of the phone) must not be covered — tower top is at Z 150 = 96 mm above the phone bottom.

@@ -3,7 +3,15 @@
 Coordinate frame used everywhere: X right, Y toward the car front, Z up, Z = 0 at the top of the
 upper chassis plate (same as the STL files).
 
-## V6 — 2026-09-24 (current, not yet printed)
+## V7 — 2026-09-24 (current, not yet printed)
+- V6 was blocked before printing: on the car the wire bundle from the board headers loops up and forward inside the chamber in front of the mast; V6's tower plate (Y −20.9) and its gussets on the front wall tops sat inside it.
+- Tower moved behind the mast: arched bulkhead at Y −48 … −44.6 (45° haunches from Z 37 to a 30 mm bridge at Z 58.2, plate Z 60 … 150), rails/lips Y −48 … −69, floor groove Y −62 … −48.
+- Front gussets now on the battery-bay walls (Y −45.6 … −26, apex Z 118); rear gussets behind the lips (apex Z 105).
+- Mast kept at the V4 height (Z 65). Front walls dropped to Z 40.5 beyond Y 39 and cut at Y 46. V4 wall windows filled. Rear tail 45° from (Y −69, Z 60).
+- Keep-out proven by boolean intersection = 0: chamber X ±36.25 / Y > −17.55 / Z > 40; anything above Z 65 in front of the mast; anything beyond Y 46.
+- 104.3 cm³. Islands 0, bridges = V4 + 30 mm arch, bed contact 1991 mm².
+
+## V6 — 2026-09-24 (superseded, never printed)
 - Fixed 90° vertical phone tower rooted in the V4 transverse "mast" wall (Y −20.9 … −17.5, Z 54 … 150).
 - Phone slot: V4-verified 81.5 mm width, lips ±36.25 mm, 45° rail chamfer, 2.5 mm lips; depth reduced 20 → **18.5 mm**.
 - Bottom groove 14 mm with 45° lead-in; floor pads 15 mm each side, 51 mm centre gap for USB‑C.
